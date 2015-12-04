@@ -3,6 +3,12 @@ module.exports = {
 
   output: {
     path: __dirname + "/public",
-    filename: (function() { return "bundle.js" })()
+    filename: "bundle.js"
+  },
+
+  module: {
+    loaders: [
+      { test: /\.js$/, loader: 'babel-loader' }
+    ]
   }
 };
