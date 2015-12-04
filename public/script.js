@@ -9,7 +9,7 @@ class H1C extends React.Component {
   render() {
     return (
       <div className="green">
-        Hello ES6+....
+        Hello ES6+++....
         <ReasonsWhyWeLikeReact />
         <GoogleLogo />
       </div>

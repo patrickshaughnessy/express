@@ -1,7 +1,7 @@
 import React from "react";
 
-var ReasonsWhyWeLikeReact = React.createClass({
-  render: function() {
+class ReasonsWhyWeLikeReact extends React.Component {
+  render() {
     return (
       <ul>
         <li>The What vs. The How</li>
@@ -10,6 +10,6 @@ var ReasonsWhyWeLikeReact = React.createClass({
       </ul>
     );
   }
-});
+}
 
 export default ReasonsWhyWeLikeReact;
