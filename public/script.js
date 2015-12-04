@@ -1,19 +1,20 @@
-// React App..
+import React from "react";
+import ReactDOM from "react-dom";
 
-var React = require("react");
-var ReactDOM = require("react-dom");
+import GoogleLogo from "./GoogleLogo";
 
-var GoogleLogo = require("./GoogleLogo");
+import ReasonsWhyWeLikeReact from "./ReasonsWhyWeLikeReact";
 
-var H1C = React.createClass({
-  render: function() {
+class H1C extends React.Component {
+  render() {
     return (
       <div className="green">
-        Hello JSX....
+        Hello ES6+....
+        <ReasonsWhyWeLikeReact />
         <GoogleLogo />
       </div>
-    )
+    );
   }
-});
+}
 
 ReactDOM.render(<H1C />, document.getElementById('react'));

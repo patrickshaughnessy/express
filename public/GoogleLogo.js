@@ -1,4 +1,4 @@
-var React = require("react");
+import React from "react";
 
 var GoogleLogo = React.createClass({
   render: function() {
@@ -6,4 +6,4 @@ var GoogleLogo = React.createClass({
   }
 });
 
-module.exports = GoogleLogo;
+export default GoogleLogo;
