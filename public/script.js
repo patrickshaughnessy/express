@@ -23,11 +23,20 @@ let Timer = React.createClass({
 });
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { timers: [5, 99, 42, 10] };
+  }
+  content() {
+    return this.state.timers.map((seconds, i) =>
+      <Timer startingSeconds={seconds} key={i} />
+    );
+  }
   render() {
     return (
       <div>
-        <Timer startingSeconds={5} />
-        <Timer startingSeconds={99} />
+        {this.content()}
       </div>
     );
   }
