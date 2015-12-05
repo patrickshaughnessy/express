@@ -52,11 +52,13 @@ class App extends React.Component {
   changeInput(e) {
     this.setState( { newTimerSeconds: e.target.value } );
   }
-  addTimer() {
+  addTimer(e) {
+    e.preventDefault();
     // Push the new timer to our timers on the state.
-    let currentTimers = this.state.timers;
-    currentTimers.push(Number(this.state.newTimerSeconds));
-    this.setState({ timers: currentTimers, newTimerSeconds: null });
+    this.setState({
+      timers: this.state.timers.concat(Number(this.state.newTimerSeconds)),
+      newTimerSeconds: null
+    });
   }
   render() {
     let timersList = this.state.timers.map((timer, i) =>
@@ -64,10 +66,14 @@ class App extends React.Component {
     );
     return (
       <div>
-        <input value={this.state.newTimerSeconds}
+        <form onSubmit={this.addTimer.bind(this)}>
+          <input type="number"
+               value={this.state.newTimerSeconds}
                placeholder="seconds"
-               onChange={this.changeInput.bind(this)} />
-             <button onClick={this.addTimer.bind(this)}>Add Timer</button>
+               onChange={this.changeInput.bind(this)}
+               required />
+             <button type="submit">Add Timer</button>
+        </form>
           <br />
           {timersList}
       </div>
