@@ -12,6 +12,7 @@ class Timer extends React.Component {
   //   return { remainingSeconds: this.props.startingSeconds,
   //            running: true };
   // }
+  // PropType: {}
   componentDidMount() {
     let delta = 1;
     this.intervalId = setInterval(() => {
@@ -39,6 +40,10 @@ class Timer extends React.Component {
   }
 }
 
+Timer.propTypes = {
+  startingSeconds: React.PropTypes.number.isRequired
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -50,7 +55,7 @@ class App extends React.Component {
   addTimer() {
     // Push the new timer to our timers on the state.
     let currentTimers = this.state.timers;
-    currentTimers.push(this.state.newTimerSeconds);
+    currentTimers.push(Number(this.state.newTimerSeconds));
     this.setState({ timers: currentTimers, newTimerSeconds: null });
   }
   render() {
