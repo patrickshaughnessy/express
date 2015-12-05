@@ -42,20 +42,29 @@ class Timer extends React.Component {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { newTimerSeconds: null };
+    this.state = { newTimerSeconds: null, timers: [42, 9] };
   }
   changeInput(e) {
-    this.setState( { name: e.target.value } );
+    this.setState( { newTimerSeconds: e.target.value } );
+  }
+  addTimer() {
+    // Push the new timer to our timers on the state.
+    let currentTimers = this.state.timers;
+    currentTimers.push(this.state.newTimerSeconds);
+    this.setState({ timers: currentTimers, newTimerSeconds: null });
   }
   render() {
+    let timersList = this.state.timers.map((timer, i) =>
+      <Timer startingSeconds={timer} key={i} />
+    );
     return (
       <div>
         <input value={this.state.newTimerSeconds}
                placeholder="seconds"
                onChange={this.changeInput.bind(this)} />
-        <button>Add Timer</button>
+             <button onClick={this.addTimer.bind(this)}>Add Timer</button>
           <br />
-          <Timer startingSeconds={42} />
+          {timersList}
       </div>
     );
   }
