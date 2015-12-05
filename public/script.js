@@ -1,28 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-class Timer extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { remainingSeconds: this.props.startingSeconds };
+let Timer = React.createClass({
+  getInitialState: function() {
+    return { remainingSeconds: this.props.startingSeconds };
   }
-  componentDidMount() {
+  componentDidMount: function() {
     let delta = 1;
-    let intervalId = setInterval(() => {
+    let intervalId = setInterval(function() {
       if (this.state.remainingSeconds === 0 ||
           this.state.remainingSeconds === this.props.startingSeconds ) {
         delta = -1 * delta;
       }
       this.setState({ remainingSeconds: this.state.remainingSeconds + delta })
-    }, 1000);
-  }
-  render() {
+    }.bind(this), 1000);
+  },
+  render: function() {
     return (
       <div>{this.state.remainingSeconds}</div>
     );
   }
-}
+});
 
 class App extends React.Component {
   render() {
