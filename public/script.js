@@ -8,6 +8,10 @@ class Timer extends React.Component {
     this.state = { remainingSeconds: this.props.startingSeconds,
                    running: true };
   }
+  // getInitialState() {
+  //   return { remainingSeconds: this.props.startingSeconds,
+  //            running: true };
+  // }
   componentDidMount() {
     let delta = 1;
     this.intervalId = setInterval(() => {
@@ -36,11 +40,22 @@ class Timer extends React.Component {
 }
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { newTimerSeconds: null };
+  }
+  changeInput(e) {
+    this.setState( { name: e.target.value } );
+  }
   render() {
     return (
       <div>
-        <Timer startingSeconds={5} />
-        <Timer startingSeconds={99} />
+        <input value={this.state.newTimerSeconds}
+               placeholder="seconds"
+               onChange={this.changeInput.bind(this)} />
+        <button>Add Timer</button>
+          <br />
+          <Timer startingSeconds={42} />
       </div>
     );
   }
