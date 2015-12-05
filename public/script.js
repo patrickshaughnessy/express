@@ -44,20 +44,30 @@ Timer.propTypes = {
   startingSeconds: React.PropTypes.number.isRequired
 }
 
+// class Header extends React.Component {
+//   render() {
+//     return  <h2 className="header lead">
+//                {this.props.title}
+//             </h2>;
+//   }
+// }
+
+let Header = (props) => {
+  return <div className="header">
+           {props.title}
+         </div>;
+};
+
+import Form from "./Form";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { newTimerSeconds: null, timers: [42, 9] };
+    this.state = { timers: [42, 9] };
   }
-  changeInput(e) {
-    this.setState( { newTimerSeconds: e.target.value } );
-  }
-  addTimer(e) {
-    e.preventDefault();
+  addTimer(newSeconds) {
     // Push the new timer to our timers on the state.
     this.setState({
-      timers: this.state.timers.concat(Number(this.state.newTimerSeconds)),
-      newTimerSeconds: null
+      timers: this.state.timers.concat(newSeconds)
     });
   }
   render() {
@@ -66,16 +76,10 @@ class App extends React.Component {
     );
     return (
       <div>
-        <form onSubmit={this.addTimer.bind(this)}>
-          <input type="number"
-               value={this.state.newTimerSeconds}
-               placeholder="seconds"
-               onChange={this.changeInput.bind(this)}
-               required />
-             <button type="submit">Add Timer</button>
-        </form>
-          <br />
-          {timersList}
+        <Header title="React Rocks??" />
+        <Form action={this.addTimer.bind(this)} />
+        <br />
+        {timersList}
       </div>
     );
   }
