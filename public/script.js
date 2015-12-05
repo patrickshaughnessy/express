@@ -27,9 +27,13 @@ class Timer extends React.Component {
     }, 1000);
   }
   handleClick() {
-    console.log("clicked", this.state);
-    // clearInterval(this.intervalId);
+    if (!this.state.running) {
+      this.props.destroy();
+    }
     this.setState({running: !this.state.running});
+  }
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
   }
   render() {
     return (
@@ -70,9 +74,17 @@ class App extends React.Component {
       timers: this.state.timers.concat(newSeconds)
     });
   }
+  removeTimer(index) {
+    console.log("in removeTimer inside the App");
+    let currentTimers = this.state.timers;
+    currentTimers.splice(index, 1)
+
+    this.setState( {timers: currentTimers} )
+  }
   render() {
     let timersList = this.state.timers.map((timer, i) =>
-      <Timer startingSeconds={timer} key={i} />
+      <Timer startingSeconds={timer} key={i}
+             destroy={this.removeTimer.bind(this, i)} />
     );
     return (
       <div>
