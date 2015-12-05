@@ -5,11 +5,15 @@ class Timer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { remainingSeconds: this.props.startingSeconds };
+    this.state = { remainingSeconds: this.props.startingSeconds,
+                   running: true };
   }
   componentDidMount() {
     let delta = 1;
     this.intervalId = setInterval(() => {
+      if (!this.state.running) {
+        return;
+      }
       if (this.state.remainingSeconds === 0 ||
           this.state.remainingSeconds === this.props.startingSeconds ) {
         delta = -1 * delta;
@@ -19,7 +23,8 @@ class Timer extends React.Component {
   }
   handleClick() {
     console.log("clicked", this.state);
-    clearInterval(this.intervalId);
+    // clearInterval(this.intervalId);
+    this.setState({running: !this.state.running});
   }
   render() {
     return (
