@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 let Timer = React.createClass({
   getInitialState: function() {
     return { remainingSeconds: this.props.startingSeconds };
-  }
+  },
   componentDidMount: function() {
     let delta = 1;
     let intervalId = setInterval(function() {
