@@ -14,6 +14,7 @@ class Timer extends React.Component {
   // }
   // PropType: {}
   componentDidMount() {
+    console.log(this.props);
     let delta = 1;
     this.intervalId = setInterval(() => {
       if (!this.state.running) {
@@ -66,25 +67,23 @@ import Form from "./Form";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { timers: [42, 9] };
+    this.state = { timers: [] };
   }
   addTimer(newSeconds) {
     // Push the new timer to our timers on the state.
     this.setState({
-      timers: this.state.timers.concat(newSeconds)
+      timers: this.state.timers.concat({ id: Date.now(), startingSeconds: newSeconds })
     });
   }
-  removeTimer(index) {
-    console.log("in removeTimer inside the App");
+  removeTimer(timerId) {
     let currentTimers = this.state.timers;
-    currentTimers.splice(index, 1)
-
-    this.setState( {timers: currentTimers} )
+    currentTimers = currentTimers.filter(timer => timer.id !== timerId);
+    this.setState({timers: currentTimers})
   }
   render() {
-    let timersList = this.state.timers.map((timer, i) =>
-      <Timer startingSeconds={timer} key={i}
-             destroy={this.removeTimer.bind(this, i)} />
+    let timersList = this.state.timers.map(timer =>
+      <Timer {...timer} key={timer.id}
+             destroy={this.removeTimer.bind(this, timer.id)} />
     );
     return (
       <div>
